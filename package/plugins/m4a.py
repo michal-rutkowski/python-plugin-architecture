@@ -28,14 +28,15 @@ class M4a(IPlugin):
         return self._encode_hook if self._get_extension(file) == self.file_extension else None
 
     def get_decode_hook(self, file):
-        print(file, self.file_extension)
         return self._decode_hook if self._get_extension(file) == self.file_extension else None
 
     # hooks
     def _encode_hook(self, file):
+        print("Encoding data to", self.file_extension)
         return file
 
     def _decode_hook(self, file):
+        print("Decoding data from", self.file_extension)
         return file
 
     # private methods

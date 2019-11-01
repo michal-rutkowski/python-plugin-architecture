@@ -32,9 +32,11 @@ class Wav(IPlugin):
 
     # hooks
     def _encode_hook(self, file):
+        print("Encoding data to", self.file_extension)
         return file
 
     def _decode_hook(self, file):
+        print("Decoding data from", self.file_extension)
         return file
 
     # private methods
