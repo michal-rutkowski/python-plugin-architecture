@@ -17,25 +17,41 @@
 
 
 class RenderTask():
+    """
+    Single processing task (decoding, encoding etc)
+    Takes a render function provided by plugins and input data.
+    """
     def __init__(self, render_function, input_data):
         self.input = input_data
         self.render_function = render_function
 
     def run(self):
+        """
+        Execute task
+        """
         return self.render_function(self.input)
 
 
 class RenderQueue():
+    """
+    Simple render queue for batch processing
+    """
     def __init__(self):
         self.tasks = []
 
     def add_task(self, task):
+        """
+        Adds RenderTask to this queue
+        """
+        assert isinstance(task, RenderTask), "RenderQueue.add_task only accepts RenderTasks"
         self.tasks.append(task)
 
     def run(self):
-        print("Rendering all tasks in queue..")
+        """
+        Renders all tasks in queue storing result data and returning as list
+        """
         results = []
         for task in self.tasks:
             results.append(task.run())
-        print("Finished rendering all tasks!")
+        self.tasks = []
         return results
