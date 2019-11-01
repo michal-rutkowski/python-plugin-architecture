@@ -36,7 +36,7 @@ class IPlugin(object, metaclass=IPluginRegistry):
     """ Plugin classes inherit from IPlugin. The methods below can be
         implemented to provide services.
     """
-    def get_role_hook(self, role_name):
+    def get_filetype_hook(self, file):
         """ Return a function accepting role contents.
             The function will be called with a single argument - the role
             contents, and should return what the role gets replaced with.
@@ -44,7 +44,7 @@ class IPlugin(object, metaclass=IPluginRegistry):
         """
         return None
 
-    def get_contents_hook(self):
+    def get_encode_hook(self, file):
         """ Return a function accepting full document contents.
             The functin will be called with a single argument - the document
             contents (after paragraph splitting and role processing), and
@@ -52,6 +52,18 @@ class IPlugin(object, metaclass=IPluginRegistry):
             None if the plugin doesn't provide a hook for this role.
         """
         return None
+
+    def get_decode_hook(self, file):
+        """ Return a function accepting full document contents.
+            The functin will be called with a single argument - the document
+            contents (after paragraph splitting and role processing), and
+            should return the transformed contents.
+            None if the plugin doesn't provide a hook for this role.
+        """
+        return None
+
+    def _get_extension(self, filename):
+        return os.path.splitext(filename)[1]
 
 
 def discover_plugins(dirs):
