@@ -1,11 +1,11 @@
 # -*- Coding: utf-8 -*-
 #!/usr/bin/python
-# env.py
+# chr.py
 """
-    Environment Exporter Plugin
+    Character Exporter Plugin
     ~~~~~~~~~~~~~~~~~~
 
-    Exporter plugin for Maya environments.
+    Exporter plugin for Maya characters.
 
     Based on article "Fundamental concepts of plugin infrastructures"
     by Eli Bendersky (eliben@gmail.com)
@@ -20,14 +20,14 @@ import sys
 from iplugin27 import IPlugin
 
 
-class Env(IPlugin):
+class CharacterExporter(IPlugin):
     """
     Environment exporter
     """
     def __init__(self, maya_object):
-        super(Env, self).__init__(maya_object)
-        self.plugin_name = "Environment Exporter"
-        self.maya_prefix = "ENV_"
+        super(CharacterExporter, self).__init__(plugin_name="Character Exporter")
+        self.plugin_name = "Character Exporter"
+        self.maya_prefix = "CHR_"
 
     # hook getters
     def get_export_hook(self, maya_object):

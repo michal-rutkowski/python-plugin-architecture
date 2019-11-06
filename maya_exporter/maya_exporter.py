@@ -16,7 +16,7 @@ import os
 import sys
 
 # Imports (Python 2.7)
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app", "maya_exporter"))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app"))
 import exporter as Exporter
 import iplugin27 as PluginRegistry
 
@@ -30,9 +30,9 @@ def run(maya_object):
     #  Plugin discovery #
     # Load plugins from package/plugins directory
     print("Loading plugins..")
-    plugins_path = os.path.join(current_dir, "package", "plugins", "maya_exporter")
+    plugins_path = os.path.join(current_dir, "package", "plugins")
     plugins = PluginRegistry.discover_plugins([plugins_path])
-    #print("Plugins loaded:" + " ".join([p.plugin_name for p in plugins]))
+    print("Plugins loaded:", plugins)
 
     #  Plugin usage #
     # Instance maya exporter providing a list of discovered plugins

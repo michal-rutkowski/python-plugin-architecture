@@ -30,14 +30,15 @@ class IPluginRegistry(type):
 
 class IPlugin(object):
     __metaclass__ = IPluginRegistry
-    def __init__(self, maya_object):
+    def __init__(self, plugin_name=None):
         """ Initialize the plugin.
         """
-        self.maya_object = maya_object
+        return
 
     """ Plugin classes inherit from IPlugin. The methods below can be
         implemented to provide services.
     """
+
     def get_export_hook(self, maya_object):
         """ Return a function accepting full document contents.
             The functin will be called with a single argument - the document
