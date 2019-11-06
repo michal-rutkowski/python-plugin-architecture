@@ -16,8 +16,9 @@
     :Created: 2019/10/31
     :Python Version: 3.7
 """
-import imp
+import importlib
 import os
+import sys
 
 
 class IPluginRegistry(type):
@@ -75,9 +76,10 @@ def discover_plugins(dirs):
         for filename in os.listdir(dir):
             modname, ext = os.path.splitext(filename)
             if ext == '.py':
-                file, path, descr = imp.find_module(modname, [dir])
-                if file:
-                    # Loading the module registers the plugin in
-                    # IPluginRegistry
-                    mod = imp.load_module(modname, file, path, descr)
+                # importlib in python2.7 doesnt support importing by filename
+                if dir not in sys.path:
+                    sys.path.append(os.path.abspath(dir))
+                # Loading the module registers the plugin in
+                # IPluginRegistry
+                importlib.import_module(modname)
     return IPluginRegistry.plugins
