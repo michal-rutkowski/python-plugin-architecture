@@ -76,7 +76,7 @@ def discover_plugins(dirs):
         for filename in os.listdir(dir):
             modname, ext = os.path.splitext(filename)
             if ext == '.py':
-                # importlib in python2.7 doesnt support importing by filename
+                # importlib throws error when passing absolute path
                 if dir not in sys.path:
                     sys.path.append(os.path.abspath(dir))
                 # Loading the module registers the plugin in
