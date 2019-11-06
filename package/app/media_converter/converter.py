@@ -24,7 +24,7 @@ if sys.version_info[0] < 3:
     import iplugin27 as PluginRegistry
 # python 3.xx
 else:
-    import package.app.render_queue as RenderQueue
+    import package.app.media_converter.render_queue as RenderQueue
     import package.app.iplugin as IPluginRegistry
 
 

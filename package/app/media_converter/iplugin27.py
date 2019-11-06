@@ -13,8 +13,8 @@
     by Eli Bendersky (eliben@gmail.com)
 
     :Author: Michal Adam Rutkowski
-    :Created: 2019/10/31
-    :Python Version: 3.7
+    :Created: 2019/11/6
+    :Python Version: 2.7
 """
 import importlib
 import os
@@ -28,7 +28,8 @@ class IPluginRegistry(type):
             IPluginRegistry.plugins.append(cls)
 
 
-class IPlugin(object, metaclass=IPluginRegistry):
+class IPlugin(object):
+    __metaclass__ = IPluginRegistry
     def __init__(self, file=None):
         """ Initialize the plugin. Optionally provide input file.
         """

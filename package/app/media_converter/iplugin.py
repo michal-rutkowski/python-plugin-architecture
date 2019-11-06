@@ -2,7 +2,7 @@
 #!/usr/bin/python
 # iplugin.py
 """
-    IPlugin
+    IPlugin (Python 3)
     ~~~~~~~~~~~~~~~~~~
 
     IPlugin and IPluginRegistry interface classes.
@@ -28,8 +28,7 @@ class IPluginRegistry(type):
             IPluginRegistry.plugins.append(cls)
 
 
-class IPlugin(object):
-    __metaclass__ = IPluginRegistry
+class IPlugin(object, metaclass=IPluginRegistry):
     def __init__(self, file=None):
         """ Initialize the plugin. Optionally provide input file.
         """

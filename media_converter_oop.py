@@ -14,14 +14,14 @@
 
     :Author: Michal Adam Rutkowski
     :Created: 2019/10/31
-    :Python Version: 3.7
+    :Python Version: 2.7/3.7
 """
 import os
 import sys
 
 # python 2.7
 if sys.version_info[0] < 3:
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app")
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app", "media_converter")
     sys.path.append(path)
     import converter as Converter
     import iplugin27 as PluginRegistry
@@ -38,9 +38,9 @@ class MediaConverter():
         print("Loading plugins..")
         current_dir = path = os.path.join(os.path.dirname(os.path.abspath(__file__)))
         if sys.version_info[0] < 3:
-            plugins = PluginRegistry.discover_plugins([os.path.join(current_dir, "package", "plugins", "python2")])
+            plugins = PluginRegistry.discover_plugins([os.path.join(current_dir, "package", "plugins", "media_converter", "python2")])
         else:
-            plugins = PluginRegistry.discover_plugins([os.path.join(current_dir, "package", "plugins", "python3")])
+            plugins = PluginRegistry.discover_plugins([os.path.join(current_dir, "package", "plugins", "media_converter", "python3")])
         self.plugins = plugins
 
     def run(self, input_file, output_format):
