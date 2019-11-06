@@ -21,7 +21,9 @@ import sys
 
 # python 2.7
 if sys.version_info[0] < 3:
-    sys.path.append("./package/app")
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app")
+    print("Loading package folder", path)
+    sys.path.append(path)
     import converter as Converter
     import iplugin27 as PluginRegistry
 # python 3.xx
@@ -29,14 +31,14 @@ else:
     import package.app.converter as Converter
     import package.app.iplugin as PluginRegistry
 
-if __name__ == '__main__':
+
+def run(input_file, output_format):
     # Parse commandline arguments
-    current_dir = os.path.dirname(sys.argv[0])
-    if len(sys.argv) < 3:
+    current_dir = path = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+    if input_file is None or output_format is None:
         raise IOError("Please provide an input file and output format")
 
     # Input file
-    input_file = os.path.abspath(sys.argv[1])
     if not os.path.isfile(input_file):
         raise IOError("Sorry this input file is invalid.")
 
@@ -53,8 +55,12 @@ if __name__ == '__main__':
     converter = Converter.Converter(input_file, plugins)
 
     # Set output format from commandline argument
-    converter.set_output_format(sys.argv[2])
+    converter.set_output_format(output_format)
 
     # Run encoding task
     converter.encode()
     print("Finished converting!")
+
+
+if __name__ == '__main__':
+    run(sys.argv[1], sys.argv[2])
