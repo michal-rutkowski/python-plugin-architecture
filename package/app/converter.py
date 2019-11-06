@@ -15,10 +15,17 @@
     :Python Version: 3.7
 """
 import os
+import sys
 from enum import Enum
 
-import package.app.render_queue as RenderQueue
-import package.app.iplugin as IPluginRegistry
+# python 2.7
+if sys.version_info[0] < 3:
+    import render_queue as RenderQueue
+    import iplugin27 as PluginRegistry
+# python 3.xx
+else:
+    import package.app.render_queue as RenderQueue
+    import package.app.iplugin as IPluginRegistry
 
 
 class ProcessingMode(Enum):

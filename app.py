@@ -19,8 +19,15 @@
 import os
 import sys
 
-import package.app.converter as Converter
-import package.app.iplugin as PluginRegistry
+# python 2.7
+if sys.version_info[0] < 3:
+    sys.path.append("./package/app")
+    import converter as Converter
+    import iplugin27 as PluginRegistry
+# python 3.xx
+else:
+    import package.app.converter as Converter
+    import package.app.iplugin as PluginRegistry
 
 if __name__ == '__main__':
     # Parse commandline arguments
@@ -36,8 +43,10 @@ if __name__ == '__main__':
     #  Plugin discovery #
     # Load plugins from package/plugins directory
     print("Loading plugins..")
-    plugins = PluginRegistry.discover_plugins([os.path.join(current_dir, "package", "plugins")])
-
+    if sys.version_info[0] < 3:
+        plugins = PluginRegistry.discover_plugins([os.path.join(current_dir, "package", "plugins", "python2")])
+    else:
+        plugins = PluginRegistry.discover_plugins([os.path.join(current_dir, "package", "plugins", "python3")])
     #  Plugin usage #
     # Instance our converter providing a list of discovered plugins
     print("Loading media converter..")
