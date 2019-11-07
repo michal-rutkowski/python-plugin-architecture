@@ -22,7 +22,7 @@ from iplugin27 import IPlugin
 
 class EffectExporter(IPlugin):
     """
-    Effect exporter
+        Effect exporter
     """
     def __init__(self, maya_object):
         super(EffectExporter, self).__init__(plugin_name="Effect Exporter")

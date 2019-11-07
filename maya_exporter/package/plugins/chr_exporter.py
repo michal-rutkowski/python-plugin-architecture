@@ -1,6 +1,6 @@
 # -*- Coding: utf-8 -*-
 #!/usr/bin/python
-# chr.py
+# chr_exporter.py
 """
     Character Exporter Plugin
     ~~~~~~~~~~~~~~~~~~
@@ -22,7 +22,7 @@ from iplugin27 import IPlugin
 
 class CharacterExporter(IPlugin):
     """
-    Environment exporter
+        Environment exporter
     """
     def __init__(self, maya_object):
         super(CharacterExporter, self).__init__(plugin_name="Character Exporter")

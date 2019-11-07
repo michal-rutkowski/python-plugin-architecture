@@ -31,16 +31,19 @@ class IPluginRegistry(type):
 class IPlugin(object):
     __metaclass__ = IPluginRegistry
     def __init__(self, plugin_name=None):
-        """ Initialize the plugin.
+        """
+            Initialize the plugin.
         """
         return
 
-    """ Plugin classes inherit from IPlugin. The methods below can be
+    """
+        Plugin classes inherit from IPlugin. The methods below can be
         implemented to provide services.
     """
 
     def get_export_hook(self, maya_object):
-        """ Return a function accepting full document contents.
+        """
+            Return a function accepting full document contents.
             The functin will be called with a single argument - the document
             contents (after paragraph splitting and role processing), and
             should return the transformed contents.
@@ -50,7 +53,8 @@ class IPlugin(object):
 
 
 def discover_plugins(dirs):
-    """ Discover the plugin classes contained in Python files, given a
+    """
+        Discover the plugin classes contained in Python files, given a
         list of directory names to scan. Return a list of plugin classes.
     """
     for dir in dirs:

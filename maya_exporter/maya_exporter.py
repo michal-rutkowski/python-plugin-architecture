@@ -1,12 +1,14 @@
 # -*- Coding: utf-8 -*-
 #!/usr/bin/python
-# App.py
+# maya_exporter.py
 """
     Maya Exporter Demo
     ~~~~~~~~~~~~~~~~~~
 
     Demo project for plugin based architecture in Python 2.7
-    This is a simple exporter for Maya assets based on object prefix.
+
+    Maya asset exporter tool.
+    Uses plugins to determine export routines based on object name prefix.
 
     :Author: Michal Adam Rutkowski
     :Created: 2019/10/31
@@ -16,14 +18,16 @@ import os
 import sys
 
 # Imports (Python 2.7)
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app"))
-import exporter as Exporter
+app_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app")
+sys.path.append(app_path)
+import exporter_core as ExporterCore
 import iplugin27 as PluginRegistry
 
 
 def run(maya_object):
     """
-        Main method
+        Entry point for exporting routine.
+        Loads plugins and passes maya_object to ExporterCore.
     """
     current_dir = path = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,10 +41,10 @@ def run(maya_object):
     #  Plugin usage #
     # Instance maya exporter providing a list of discovered plugins
     print("Loading exporter..")
-    exporter = Exporter.Exporter(maya_object, plugins)
+    exporter = ExporterCore.ExporterCore(plugins)
 
     # Run exporter
-    exporter.run()
+    exporter.run(maya_object)
     print("Finished exporting!")
 
 

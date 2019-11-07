@@ -1,6 +1,6 @@
 # -*- Coding: utf-8 -*-
 #!/usr/bin/python
-# env.py
+# env_exporter.py
 """
     Environment Exporter Plugin
     ~~~~~~~~~~~~~~~~~~
@@ -22,7 +22,7 @@ from iplugin27 import IPlugin
 
 class EnvironmentExporter(IPlugin):
     """
-    Environment exporter
+        Environment exporter
     """
     def __init__(self, maya_object):
         super(EnvironmentExporter, self).__init__(plugin_name="Environment Exporter")
