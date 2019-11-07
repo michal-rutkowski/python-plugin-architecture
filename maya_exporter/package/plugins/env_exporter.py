@@ -22,15 +22,25 @@ from iplugin27 import IPlugin
 
 class EnvironmentExporter(IPlugin):
     """
-        Environment exporter
+        Environment exporter plugin
     """
     def __init__(self, maya_object):
-        super(EnvironmentExporter, self).__init__(plugin_name="Environment Exporter")
+        IPlugin.__init__(self)
         self.plugin_name = "Environment Exporter"
         self.maya_prefix = "ENV_"
 
-    # hook getters
+    def get_prefix(self):
+        """
+            Returns Maya object prefix this plugin expects
+        """
+        return self.maya_prefix
+
     def get_export_hook(self, maya_object):
+        """
+            Getter method for export hook.
+            Condition matching is handled here.
+            This example uses a simple object name prefix.
+        """
         return self._export_hook if maya_object.startswith(self.maya_prefix) else None
 
     # hooks

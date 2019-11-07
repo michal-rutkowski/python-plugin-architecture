@@ -17,6 +17,8 @@
     :Python Version: 2.7
 """
 import importlib
+import imp
+
 import os
 import sys
 
@@ -24,7 +26,8 @@ import sys
 class IPluginRegistry(type):
     plugins = []
     def __init__(cls, name, bases, attrs):
-        if name != 'IPlugin':
+        # Added check for existing entries to ensure dynamic reload support
+        if name != 'IPlugin' and name not in IPluginRegistry.plugins:
             IPluginRegistry.plugins.append(cls)
 
 
@@ -64,7 +67,8 @@ def discover_plugins(dirs):
                 # importlib throws error when passing absolute path
                 if dir not in sys.path:
                     sys.path.append(os.path.abspath(dir))
-                # Loading the module registers the plugin in
-                # IPluginRegistry
-                importlib.import_module(modname)
+                # Loading the module registers the plugin in IPluginRegistry
+                module = importlib.import_module(modname)
+                # This is for development only
+                imp.reload(module)
     return IPluginRegistry.plugins
