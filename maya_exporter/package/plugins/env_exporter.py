@@ -17,17 +17,17 @@
 import os
 import sys
 
-from iplugin27 import IPlugin
+from package.app import Plugin
 
 import maya.cmds as cmds
 
 
-class EnvironmentExporter(IPlugin):
+class EnvironmentExporter(Plugin):
     """
         Environment exporter plugin
     """
     def __init__(self, maya_object):
-        IPlugin.__init__(self)
+        Plugin.__init__(self)
         self.plugin_name = "Environment Exporter"
         self.maya_prefix = "ENV_"
 

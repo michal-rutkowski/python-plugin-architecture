@@ -1,12 +1,12 @@
 # -*- Coding: utf-8 -*-
 #!/usr/bin/python
-# iplugin27.py
+# plugin.py
 """
-    IPlugin
+    Plugin Interface
     ~~~~~~~~~~~~~~~~~~
 
-    IPlugin and IPluginRegistry interface classes.
-    Plugins inheriting from IPlugin placed in
+    Plugin and PluginRegistry interface classes.
+    Plugins inheriting from Plugin placed in
     the plugins directory are automatically discovered.
 
     Based on article "Fundamental concepts of plugin infrastructures"
@@ -23,16 +23,16 @@ import os
 import sys
 
 
-class IPluginRegistry(type):
+class PluginRegistry(type):
     plugins = []
     def __init__(cls, name, bases, attrs):
         # Added check for existing entries to ensure dynamic reload support
-        if name != 'IPlugin' and name not in IPluginRegistry.plugins:
-            IPluginRegistry.plugins.append(cls)
+        if name != 'Plugin' and name not in PluginRegistry.plugins:
+            PluginRegistry.plugins.append(cls)
 
 
-class IPlugin(object):
-    __metaclass__ = IPluginRegistry
+class Plugin(object):
+    __metaclass__ = PluginRegistry
     def __init__(self, plugin_name=None):
         """
             Initialize the plugin.
@@ -40,7 +40,7 @@ class IPlugin(object):
         return
 
     """
-        Plugin classes inherit from IPlugin. The methods below can be
+        Plugin classes inherit from Plugin. The methods below can be
         implemented to provide services.
     """
 
@@ -67,8 +67,8 @@ def discover_plugins(dirs):
                 # importlib throws error when passing absolute path
                 if dir not in sys.path:
                     sys.path.append(os.path.abspath(dir))
-                # Loading the module registers the plugin in IPluginRegistry
+                # Loading the module registers the plugin in PluginRegistry
                 module = importlib.import_module(modname)
                 # This is for development only
                 imp.reload(module)
-    return IPluginRegistry.plugins
+    return PluginRegistry.plugins

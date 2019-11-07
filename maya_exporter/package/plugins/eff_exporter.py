@@ -17,15 +17,15 @@
 import os
 import sys
 
-from iplugin27 import IPlugin
+from package.app import Plugin
 
 
-class EffectExporter(IPlugin):
+class EffectExporter(Plugin):
     """
         Effect exporter plugin
     """
     def __init__(self, maya_object):
-        IPlugin.__init__(self)
+        Plugin.__init__(self)
         self.plugin_name = "Effect Exporter"
         self.maya_prefix = "EFF_"
 

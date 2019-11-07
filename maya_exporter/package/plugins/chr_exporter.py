@@ -17,15 +17,15 @@
 import os
 import sys
 
-from iplugin27 import IPlugin
+from package.app import Plugin
 
 
-class CharacterExporter(IPlugin):
+class CharacterExporter(Plugin):
     """
         Environment exporter plugin
     """
     def __init__(self, maya_object):
-        IPlugin.__init__(self)
+        Plugin.__init__(self)
         self.plugin_name = "Character Exporter"
         self.maya_prefix = "CHR_"
 

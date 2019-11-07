@@ -18,8 +18,8 @@
 import os
 import sys
 
-# python 2.7
-import iplugin27 as PluginRegistry
+from plugin import PluginRegistry
+
 import maya.cmds as cmds
 
 
@@ -61,7 +61,7 @@ class ExporterCore():
                 defaultButton="Cancel")
             return
 
-        # confirom dialog before exporting
+        # show confirm dialog before exporting
         dialog_msg = "Would you like to export " + maya_object + " using " + plugin_name + "?"
         confirm_button = "OK"
         result = cmds.confirmDialog(

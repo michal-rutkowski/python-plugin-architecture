@@ -17,12 +17,7 @@
 import os
 import sys
 
-# Add package to python path
-app_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app")
-sys.path.append(app_path)
-
-import exporter_core as ExporterCore
-import iplugin27 as PluginRegistry
+import package.app as App
 
 
 def run(maya_object):
@@ -36,13 +31,13 @@ def run(maya_object):
     # Load plugins from package/plugins directory
     print("Loading plugins..")
     plugins_path = os.path.join(current_dir, "package", "plugins")
-    plugins = PluginRegistry.discover_plugins([plugins_path])
+    plugins = App.PluginRegistry.discover_plugins([plugins_path])
     print("Plugins loaded:", plugins)
 
     #  Plugin usage #
     # Instance maya exporter providing a list of discovered plugins
     print("Loading exporter..")
-    exporter = ExporterCore.ExporterCore(plugins)
+    exporter = App.ExporterCore.ExporterCore(plugins)
 
     # Run exporter
     exporter.run(maya_object)
