@@ -17,9 +17,10 @@
 import os
 import sys
 
-# Imports (Python 2.7)
+# Add package to python path
 app_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "package", "app")
 sys.path.append(app_path)
+
 import exporter_core as ExporterCore
 import iplugin27 as PluginRegistry
 

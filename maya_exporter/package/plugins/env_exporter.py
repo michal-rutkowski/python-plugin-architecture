@@ -19,6 +19,8 @@ import sys
 
 from iplugin27 import IPlugin
 
+import maya.cmds as cmds
+
 
 class EnvironmentExporter(IPlugin):
     """
@@ -43,7 +45,19 @@ class EnvironmentExporter(IPlugin):
         """
         return self._export_hook if maya_object.startswith(self.maya_prefix) else None
 
-    # hooks
     def _export_hook(self, maya_object):
-        print("Exporting " + maya_object + " using " + self.plugin_name)
+        """
+            Export routine concrete implementation
+        """
+        # group asset
+        grp = cmds.group(maya_object, n='ENV_ASSET')
+
+        # create lods for environment assets (example)
+        object_renamed = cmds.rename(maya_object, maya_object + "_LOD0")
+        for i in range(2):
+            new_lod = cmds.duplicate(object_renamed)
+            cmds.polyReduce(new_lod, p=50.0)
+            cmds.delete(new_lod, ch=1)
+            object_renamed = cmds.rename(new_lod, maya_object + "_LOD" + str(i+1))
+
         return maya_object
