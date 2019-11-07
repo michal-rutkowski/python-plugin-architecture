@@ -4,7 +4,7 @@
 import sys
 import maya.cmds as cmds
 
-# Read script from local path (or copy to maya2019/Scripts)
+# Read script from local path (or copy to maya/2019/scripts)
 path = "C:/rumichal/Git/PythonPluginSetup/maya_exporter"
 if path not in sys.path:
     sys.path.append(path)
