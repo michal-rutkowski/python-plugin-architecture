@@ -17,7 +17,7 @@
 import os
 import sys
 
-import package.app as App
+import package.app as Core
 
 
 def run(maya_object):
@@ -31,13 +31,12 @@ def run(maya_object):
     # Load plugins from package/plugins directory
     print("Loading plugins..")
     plugins_path = os.path.join(current_dir, "package", "plugins")
-    plugins = App.PluginRegistry.discover_plugins([plugins_path])
-    print("Plugins loaded:", plugins)
+    plugins = Core.PluginRegistry.discover_plugins([plugins_path])
 
     #  Plugin usage #
     # Instance maya exporter providing a list of discovered plugins
     print("Loading exporter..")
-    exporter = App.ExporterCore.ExporterCore(plugins)
+    exporter = Core.ExporterCore.ExporterCore(plugins)
 
     # Run exporter
     exporter.run(maya_object)

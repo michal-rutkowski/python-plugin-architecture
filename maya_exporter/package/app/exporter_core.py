@@ -28,7 +28,7 @@ class ExporterCore():
         Maya Exporter core object.
         Call run() method with a Maya object to kick off exporting.
     """
-    def __init__(self, plugins=[]):
+    def __init__(self, plugins={}):
         """
             Initialize with plugin list.
         """
@@ -83,7 +83,7 @@ class ExporterCore():
             Note that name matching is handled by plugins.
         """
         # Plugins are classes - we need to instantiate them to get objects.
-        plugins = [P(maya_object) for P in self.plugins]
+        plugins = [P(maya_object) for P in self.plugins.values()]
         for p in plugins:
             hook = p.get_export_hook(maya_object)
             if hook:
@@ -95,7 +95,7 @@ class ExporterCore():
             Scans plugins and returns all supported object prefices.
         """
         # Plugins are classes - we need to instantiate them to get objects.
-        plugins = [P("default") for P in self.plugins]
+        plugins = [P("default") for P in self.plugins.values()]
         prefix_dict = {}
         for p in plugins:
             prefix_dict[p.plugin_name] = p.get_prefix()
